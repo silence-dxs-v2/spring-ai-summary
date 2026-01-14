@@ -1,5 +1,6 @@
 package com.glmapper.ai.chat.ollama.controller;
 
+import com.glmapper.ai.chat.ollama.service.ChatMemoryService;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,8 @@ public class ChatController {
 
     @Autowired
     private ChatClient chatClient;
+    @Autowired
+    private ChatMemoryService chatMemoryService;
 
     /**
      * 普通的聊天接口
@@ -34,6 +37,21 @@ public class ChatController {
                 .user( userInput)
                 .call()
                 .content();
+    }
+
+    /**
+     * 普通的聊天接口
+     *
+     * @param userInput 用户输入
+     * @return 返回内容
+     */
+    @GetMapping("/chat-memory")
+    public String prompt(@RequestParam String userInput,String conversationId) {
+        return chatMemoryService.call(userInput,conversationId);
+//        return this.chatClient.prompt("你是一个智能助手，请用自然语言形式回答，不要使用JSON格式或其他结构化格式")
+//                .user("问题：" + userInput)
+//                .call()
+//                .content();
     }
 
     /**

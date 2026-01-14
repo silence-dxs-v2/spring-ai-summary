@@ -30,8 +30,8 @@ public class ChatController {
      */
     @GetMapping("/chat")
     public String prompt(@RequestParam String userInput) {
-        return this.chatClient.prompt("你是一个智能助手，请用自然语言形式回答，不要使用JSON格式或其他结构化格式")
-                .user("问题：" + userInput)
+        return this.chatClient.prompt()
+                .user( userInput)
                 .call()
                 .content();
     }
@@ -48,7 +48,7 @@ public class ChatController {
         
         try {
             // 使用流式调用
-            Flux<String> response = this.chatClient.prompt("你是一个智能助手，请用自然语言形式回答，不要使用JSON格式或其他结构化格式")
+            Flux<String> response = this.chatClient.prompt()
                 .user(userInput)
                 .stream()
                 .content();

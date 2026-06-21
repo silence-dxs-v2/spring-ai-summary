@@ -14,7 +14,7 @@ import reactor.core.publisher.Flux;
  * @Classname ChatController
  * @Description ollama ChatController
  * @Date 2025/6/6 08:26
- * @Created by Gepeng18
+ * @Created by Gepeng18111
  */
 @RestController
 @RequestMapping("/api/ollama")
